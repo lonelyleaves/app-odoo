@@ -8,8 +8,8 @@
 # Copyright (C) 2018-11  欧度智能 https://www.odooai.cn
 
 {
-    'name': '2023最新中国企业会计科目表.Latest Chinese Accounting for odoo16',
-    'version': '16.23.03.01',
+    'name': '2023最新中国会计科目表.企业标准会计.Latest Chinese Accounting for odoo16',
+    'version': '16.24.05.28',
     'author': 'odooai.cn',
     'category': 'Accounting/Localizations/Account Charts',
     'website': 'https://www.odooai.cn',
@@ -33,6 +33,7 @@
     7. 注意，必须在没有业务数据，没有会计科目的初始环境。可以使用 "app_odoo_customize" 模块清除财务数据，重置会计科目。
      
     如果是多语种环境需要自行更改翻译，主要体现在3%,6%,13%增值税处理。
+    中国财务，中国会计，中国城市
     欧度智能，odooai.cn
         
     The Latest Chinese Account

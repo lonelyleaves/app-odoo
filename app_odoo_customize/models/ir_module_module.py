@@ -18,6 +18,7 @@ class IrModule(models.Model):
     local_updatable = fields.Boolean('Local updatable', compute=False, default=False, store=True)
     addons_path_id = fields.Many2one('ir.module.addons.path', string='Addons Path ID', readonly=True)
     addons_path = fields.Char(string='Addons Path', related='addons_path_id.path', readonly=True)
+    license = fields.Char(readonly=True)
 
     def module_multi_uninstall(self):
         """ Perform the various steps required to uninstall a module completely
@@ -57,7 +58,7 @@ class IrModule(models.Model):
 
     def button_get_po(self):
         self.ensure_one()
-        action = self.env.ref('app_odoo_customize.action_server_module_multi_get_po').read()[0]
+        action = self.env.ref('app_odoo_customize.action_server_module_multi_get_po').sudo().read()[0]
         action['context'].update({
                 'default_lang': self.env.user.lang,
             })
@@ -71,12 +72,13 @@ class IrModule(models.Model):
         # 处理可更新字段， 不要compute，会出错
         for mod_name in modules.get_modules():
             mod = known_mods_names.get(mod_name)
-            installed_version = self.get_module_info(mod.name).get('version', default_version)
-            if installed_version and mod.latest_version and operator.gt(installed_version, mod.latest_version):
-                local_updatable = True
-            else:
-                local_updatable = False
-            if mod.local_updatable != local_updatable:
-                mod.write({'local_updatable': local_updatable})
+            if mod:
+                installed_version = self.get_module_info(mod.name).get('version', default_version)
+                if installed_version and mod.latest_version and operator.gt(installed_version, mod.latest_version):
+                    local_updatable = True
+                else:
+                    local_updatable = False
+                if mod.local_updatable != local_updatable:
+                    mod.write({'local_updatable': local_updatable})
             
         return res

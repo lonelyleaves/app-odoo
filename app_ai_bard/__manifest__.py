@@ -8,7 +8,7 @@
 
 {
     'name': 'Google Bard Ai for odoo ai center, 谷歌Ai支持',
-    'version': '16.23.07.29',
+    'version': '16.23.10.11',
     'author': 'odooai.cn',
     'company': 'odooai.cn',
     'maintainer': 'odooai.cn',
@@ -39,7 +39,7 @@
     9. Can set Synchronous or Asynchronous mode for Ai response.
     10.Filter Sensitive Words Setup.
     11. Multi-language Support. Multi-Company Support.
-    12. Support Odoo 16,15,14,13,12, Enterprise and Community and odoo.sh Edition.
+    12. Support Odoo 17,16,15,14,13,12, Enterprise and Community and odoo.sh Edition.
     13. Full Open Source.
     ''',
     'depends': [

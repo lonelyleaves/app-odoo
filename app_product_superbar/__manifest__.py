@@ -17,9 +17,9 @@
 
 {
     'name': "App product browse by category navigator",
-    'version': '16.22.12.06',
+    'version': '16.23.09.01',
     'author': 'odooai.cn',
-    'category': 'Base',
+    'category': 'Extra tools',
     'website': 'https://www.odooai.cn',
     'live_test_url': 'https://demo.odooapp.cn',
     'license': 'LGPL-3',
@@ -40,7 +40,7 @@
     'depends': [
         'stock',
     ],
-    'images': ['static/description/banner.gif'],
+    'images': ['static/description/banner.png'],
     'data': [
         'views/product_template_views.xml',
         'views/product_category_views.xml',

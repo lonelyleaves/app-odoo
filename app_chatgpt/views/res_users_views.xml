@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="app_chat_res_users_tree_view" model="ir.ui.view">
+        <field name="name">app.chat.res.users.tree</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login_date']" position="before">
+                <field name="is_chat_private" widget="boolean_toggle" optional="show"/>
+            </xpath>
+        </field>
+    </record>
     <record id="app_chatgpt_res_users_form" model="ir.ui.view">
         <field name="name">app.chatgpt.res.users.form</field>
         <field name="model">res.users</field>
@@ -17,6 +27,7 @@
                             <field name="gpt_policy"/>
                             <field name="gpt_wl_partners" widget="many2many_tags" attrs="{'invisible': [('gpt_policy', '=', 'all')]}"/>
                             <field name="gpt_demo_time"/>
+                            <field name="is_chat_private"/>
                         </group>
                     </group>
                 </page>
@@ -29,6 +40,9 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_search"/>
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="gpt_id"/>
+            </xpath>
             <xpath expr="//filter[@name='filter_no_share']" position="before">
                 <filter name="is_robot" string="Ai User" domain="[('gpt_id','!=',False)]"/>
                 <filter name="not_robot" string="Not Ai" domain="[('gpt_id','=',False)]"/>

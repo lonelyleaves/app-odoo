@@ -8,9 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//search">
                 <searchpanel>
-                    <field name="config_id"/>
                     <field name="state"/>
-                    <field name="user_id"/>
                 </searchpanel>
             </xpath>
         </field>

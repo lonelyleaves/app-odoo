@@ -41,7 +41,7 @@
     'name': "Website Blogs Search Enhance",
     'version': '16.23.07.07',
     'author': 'odooai.cn',
-    'category': 'Base',
+    'category': 'Website',
     'website': 'https://www.odooai.cn',
     'live_test_url': 'https://demo.odooapp.cn',
     'license': 'LGPL-3',
@@ -51,26 +51,28 @@
     'images': ['static/description/banner.png'],
     'depends': [
         'website_blog',
+        'app_base_superbar',
     ],
     'summary': '''
     Odoo App of odooai.cn
     ''',
     'description': '''    
-    Support Odoo 16,15,14,13,12, Enterprise and Community and odoo.sh Edition
+    Support Odoo 17,16,15,14,13,12, Enterprise and Community and odoo.sh Edition
     1. 
     2. 
     11. Multi-language Support. Multi-Company Support.
-    12. Support Odoo 16,15,14,13,12, Enterprise and Community and odoo.sh Edition.
+    12. Support Odoo 17,16,15,14,13,12, Enterprise and Community and odoo.sh Edition.
     13. Full Open Source.
     ==========
     1. 
     2. 
     11. 多语言支持，多公司支持
-    12. Odoo 16,15,14,13,12, 企业版，社区版，在线SaaS.sh版，等全版本支持
+    12. Odoo 17,16,15,14,13,12, 企业版，社区版，在线SaaS.sh版，等全版本支持
     13. 代码完全开源
     ''',
     'data': [
         'views/blog_post_views.xml',
+        'views/ir_attachment_views.xml',
         # 'report/.xml',
     ],
     'demo': [],

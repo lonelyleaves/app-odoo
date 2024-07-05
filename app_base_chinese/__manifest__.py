@@ -17,8 +17,8 @@
 
 
 {
-    'name': "Chinese Enhance All in One，odoo中文版套件之基础",
-    'version': '16.23.08.03',
+    'name': 'odoo中文版套件之基础,中国会计基础,Chinese Enhance All in One，',
+    'version': '16.24.05.23',
     'author': 'odooai.cn',
     'category': 'Base',
     'website': 'https://www.odooai.cn',
@@ -27,11 +27,11 @@
     'sequence': 2,
     'price': 0,
     'currency': 'EUR',
-    'summary': """
-    Chinese enhance. Out of the box use odoo in china. Chinese address format, number format, money format.
-    Set all chinese default value. Default country, timezone, currency, partner...
-    """,
-    'description': """
+    'summary': '''
+    odoo简体中文版全面增强. Chinese enhance. Out of the box use odoo in china. Chinese address format, number format, money format.
+    Set all chinese default value. Default country, timezone, currency, partner.中国会计基础模块.
+    ''',
+    'description': '''
     odoo Chinese Enhance. odoo中国版增强-基础
     1. 中文地址格式，适用于所有中国中文客户、供应商、合作伙伴、用户、员工信息等
     2. 中文默认值，如国家、时区、货币等。处理模块 base, product.
@@ -50,7 +50,7 @@
     15. 销售团队改为中国
     16. 精简语言的显示，如 Chinese简体中文改为 中文
     21. 多语言支持，多公司支持
-    22. Odoo 16,15,14,13,12, 企业版，社区版，在线SaaS.sh版，等全版本支持
+    22. Odoo 17,16,15,14,13,12, 企业版，社区版，在线SaaS.sh版，等全版本支持
     23. 代码完全开源
     ======
     1. Chinese address format, applicable to all Chinese customers, suppliers, partners, users, employee information etc.
@@ -67,11 +67,11 @@
     12.Default export translation is set to Mandarin (po).
     13.Added 'name_en_US' field in base model which updates translation value when assigned a value.
     14.Common decimal precision adjustments made.
-    15.Sales team changed to "China".
+    15.Sales team changed to [China].
     21. Multi-language Support. Multi-Company Support.
-    22. Support Odoo 16,15,14,13,12, Enterprise and Community and odoo.sh Edition.
+    22. Support Odoo 17,16,15,14,13,12, Enterprise and Community and odoo.sh Edition.
     23. Full Open Source.
-    """,
+    ''',
     'pre_init_hook': 'pre_init_hook',
     'post_init_hook': 'post_init_hook',
     'depends': [
@@ -80,6 +80,7 @@
         'sales_team',
         'sale',
         'stock',
+        'app_odoo_customize',
     ],
     'images': ['static/description/banner.jpg'],
     'data': [
@@ -90,7 +91,6 @@
         'views/ir_default_views.xml',
         # 'views/templates.xml',
         'wizard/sale_make_invoice_advance_views.xml',
-        'data/ir_default_data.xml',
         'data/base_data.xml',
         'data/decimal_precision_data.xml',
         'data/res_country_data.xml',
@@ -103,6 +103,7 @@
         'data/product_pricelist_data.xml',
         'data/stock_location_data.xml',
         'data/sales_team_data.xml',
+        'data/ir_default_data.xml',
         'views/ir_module_module_views.xml',
     ],
     'assets': {
@@ -111,8 +112,8 @@
         ]
     },
     'demo': [
-        'data/res_company_demo.xml',
-        'data/res_partner_demo.xml',
+        'demo/res_company_demo.xml',
+        'demo/res_partner_demo.xml',
     ],
     'test': [
     ],

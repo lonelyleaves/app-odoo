@@ -1,6 +1,8 @@
 id,code,name,parent_id/id,reconcile,account_type,tag_ids/id,chart_template_id/id
 account_1001,1001,库存现金,,TRUE,asset_cash,,l10n_chart_china_standard_business_latest
 account_1002,1002,银行存款,,TRUE,asset_cash,tag21,l10n_chart_china_standard_business_latest
+account_1002_08,1002.08,银行存款-未付款,,TRUE,asset_cash,tag21,l10n_chart_china_standard_business_latest
+account_1002_09,1002.09,银行存款-未收款,,TRUE,asset_cash,tag21,l10n_chart_china_standard_business_latest
 account_1003,1003,存放中央银行款项,,TRUE,asset_current,tag21,l10n_chart_china_standard_business_latest
 account_1011,1011,存放同业,,FALSE,asset_current,tag21,l10n_chart_china_standard_business_latest
 account_1012,1012,其他货币资金,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
@@ -30,6 +32,7 @@ account_1402,1402,在途物资,,FALSE,asset_current,,l10n_chart_china_standard_b
 account_1403,1403,原材料,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
 account_1404,1404,材料成本差异,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
 account_1405,1405,库存商品,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
+account_1405_01,1405.01,其中：数据资源,account_1405,FALSE,asset_current,,l10n_chart_china_standard_business_latest
 account_1406,1406,发出商品,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
 account_1407,1407,商品进销差价,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
 account_1408,1408,委托加工物资,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
@@ -62,6 +65,7 @@ account_1623,1623,公益性生物资产,,FALSE,asset_current,tag26,l10n_chart_ch
 account_1631,1631,油气资产,,FALSE,asset_current,tag28,l10n_chart_china_standard_business_latest
 account_1632,1632,累计折耗,,FALSE,asset_current,tag28,l10n_chart_china_standard_business_latest
 account_1701,1701,无形资产,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
+account_1701_01,1701.01,其中：数据资源,account_1701,FALSE,asset_current,,l10n_chart_china_standard_business_latest
 account_1702,1702,累计摊销,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
 account_1703,1703,无形资产减值准备,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
 account_1711,1711,商誉,,FALSE,asset_current,,l10n_chart_china_standard_business_latest
@@ -80,6 +84,8 @@ account_2101,2101,交易性金融负债,,FALSE,liability_current,,l10n_chart_chi
 account_2111,2111,卖出回购金融资产款,,FALSE,liability_current,tag23,l10n_chart_china_standard_business_latest
 account_2201,2201,应付票据,,TRUE,liability_payable,,l10n_chart_china_standard_business_latest
 account_2202,2202,应付账款,,TRUE,liability_payable,,l10n_chart_china_standard_business_latest
+account_2202_01,2202.01,应付账款-暂估,,TRUE,liability_payable,,l10n_chart_china_standard_business_latest
+account_2202_02,2202.02,应付账款-其他,,TRUE,liability_payable,,l10n_chart_china_standard_business_latest
 account_2203,2203,预收账款,,TRUE,liability_payable,,l10n_chart_china_standard_business_latest
 account_2211,2211,应付职工薪酬,,FALSE,liability_current,,l10n_chart_china_standard_business_latest
 account_2221,2221,应交税费,,FALSE,liability_current,,l10n_chart_china_standard_business_latest
@@ -141,6 +147,7 @@ account_5001,5001,生产成本,,FALSE,expense_direct_cost,,l10n_chart_china_stan
 account_5101,5101,制造费用,,FALSE,expense_direct_cost,,l10n_chart_china_standard_business_latest
 account_5201,5201,劳务成本,,FALSE,expense_direct_cost,,l10n_chart_china_standard_business_latest
 account_5301,5301,研发支出,,FALSE,expense_direct_cost,,l10n_chart_china_standard_business_latest
+account_5301_01,5301.01,其中：数据资源,account_5301,FALSE,expense_direct_cost,,l10n_chart_china_standard_business_latest
 account_5401,5401,工程施工,,FALSE,expense_direct_cost,tag30,l10n_chart_china_standard_business_latest
 account_5402,5402,工程结算,,FALSE,expense_direct_cost,tag30,l10n_chart_china_standard_business_latest
 account_5403,5403,机械作业,,FALSE,expense_direct_cost,tag30,l10n_chart_china_standard_business_latest

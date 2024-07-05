@@ -16,44 +16,43 @@ _logger = logging.getLogger(__name__)
 class Channel(models.Model):
     _inherit = 'mail.channel'
 
-    is_private = fields.Boolean(string="私有频道", default=False, help="私人频道不公开，可邀请及清退指定用户")
+    is_private = fields.Boolean(string="Private", default=False, help="Check to set Private, Can only use by user, not Public")
     # 因为 channel_member_ids 不好处理，在此增加此字段
     # 主Ai
-    ai_partner_id = fields.Many2one(comodel_name="res.partner", string="专属主Ai", required=False,
+    ai_partner_id = fields.Many2one(comodel_name="res.partner", string="Main Ai", required=False,
                                     domain=[('gpt_id', '!=', None), ('is_chat_private', '=', True)],
                                     default=lambda self: self._app_get_m2o_default('ai_partner_id'),
-                                    help="主Ai是主要对话对象，当没有@操作时，由主Ai回答", )
-    ext_ai_partner_id = fields.Many2one(comodel_name="res.partner", string="辅助Ai",
-                                        domain=[('gpt_id', '!=', None), ('is_chat_private', '=', True)],
-                                        help="通过 @辅助Ai 可以让辅助Ai回答问题", )
-    description = fields.Char('Ai角色设定', help="填写后，Ai将以您设定的身份与你交互，如：你是一个在航空航天领域的专家。不填则根据问题智能处理")
+                                    help="Main Ai is the robot help you default.")
+    ext_ai_partner_id = fields.Many2one(comodel_name="res.partner", string="Secondary Ai",
+                                        domain=[('gpt_id', '!=', None), ('is_chat_private', '=', True)])
+    description = fields.Text('Ai Character', help="Ai would help you act as the Character set.")
     set_max_tokens = fields.Selection([
-        ('300', '简短'),
-        ('600', '标准'),
-        ('1000', '中等'),
-        ('2000', '长篇'),
-        ('3000', '超长篇'),
+        ('300', 'Short'),
+        ('600', 'Standard'),
+        ('1000', 'Medium'),
+        ('2000', 'Long'),
+        ('3000', 'Overlength'),
         ('32000', '32K'),
-    ], string='响应篇幅限制', default='600', help="越大返回内容越多，计费也越多")
+    ], string='Max Response', default='600', help="越大返回内容越多，计费也越多")
     set_chat_count = fields.Selection([
-        ('none', 'Ai自动判断'),
+        ('none', 'Ai Auto'),
         ('1', '1标准'),
         ('3', '3强关联'),
         ('5', '5超强关联'),
-    ], string="上下文相关", default='1', help="0-5，设定后，会将最近n次对话发给Ai，有助于他更好的回答，但太大费用也高")
+    ], string="History Count", default='1', help="0-5，设定后，会将最近n次对话发给Ai，有助于他更好的回答，但太大费用也高")
     set_temperature = fields.Selection([
         ('2', '天马行空'),
         ('1.5', '创造性'),
         ('1', '标准'),
         ('0.6', '理性'),
         ('0.1', '保守'),
-    ], string="创造性", default='1', help="0-21，值越大越富有想像力，越小则越保守")
+    ], string="Set Temperature", default='1', help="0-21，值越大越富有想像力，越小则越保守")
     set_top_p = fields.Selection([
         ('0.9', '严谨惯性思维'),
         ('0.6', '标准推理'),
         ('0.4', '跳跃性'),
         ('0.1', '随便'),
-    ], string="思维连贯性", default='0.6', help="0-1，值越大越倾向大众化的连贯思维")
+    ], string="Top Probabilities", default='0.6', help="0-1，值越大越倾向大众化的连贯思维")
     # 避免使用常用词
     set_frequency_penalty = fields.Selection([
         ('2', '老学究-晦涩难懂'),
@@ -62,7 +61,7 @@ class Channel(models.Model):
         ('0.1', '少常用词'),
         ('-1', '通俗易懂'),
         ('-2', '大白话'),
-    ], string='语言风格', default='1', help="-2~2，值越大越少使用常用词")
+    ], string='Frequency Penalty', default='1', help="-2~2，值越大越少使用常用词")
     set_presence_penalty = fields.Selection([
         ('2', '多样强迫症'),
         ('1.5', '新颖化'),
@@ -70,7 +69,7 @@ class Channel(models.Model):
         ('0.1', '允许常规重复'),
         ('-1', '允许较多重复'),
         ('-2', '更多强调重复'),
-    ], string='用词多样性', default='1', help="-2~2，值越大越少重复词")
+    ], string='Presence penalty', default='1', help="-2~2，值越大越少重复词")
 
     # todo: 这里用 compute?
     max_tokens = fields.Integer('最长响应Token', default=600, help="越大返回内容越多，计费也越多")
@@ -92,7 +91,7 @@ class Channel(models.Model):
             result.append((c.id, "%s%s" % (pre, c.name or '')))
         return result
 
-    def get_openai_context(self, channel_id, author_id, answer_id, minutes=30, chat_count=1):
+    def get_openai_context(self, channel_id, author_id, answer_id, minutes=60, chat_count=0):
         # 上下文处理，要处理群的方式，以及独聊的方式
         # azure新api 处理
         context_history = []
@@ -107,6 +106,7 @@ class Channel(models.Model):
                   ('model', '=', 'mail.channel'),
                   ('message_type', '!=', 'user_notification'),
                   ('parent_id', '!=', False),
+                  ('is_ai', '=', True),
                   ('body', '!=', '<p>%s</p>' % _('Response Timeout, please speak again.')),
                   ('body', '!=', _('温馨提示：您发送的内容含有敏感词，请修改内容后再向我发送。'))]
 
@@ -115,11 +115,14 @@ class Channel(models.Model):
             domain = expression.AND([domain, [('date', '>=', afterTime)]])
         else:
             domain = expression.AND([domain, [('author_id', '=', answer_id.id)]])
-        ai_msg_list = message_model.with_context(tz='UTC').search(domain, order="id desc", limit=chat_count)
+        if chat_count == 0:
+            ai_msg_list = []
+        else:
+            ai_msg_list = message_model.with_context(tz='UTC').search(domain, order="id desc", limit=chat_count)
         for ai_msg in ai_msg_list:
             # 判断这个 ai_msg 是不是ai发，有才 insert。 判断 user_msg 是不是 user发的，有才 insert
             user_msg = ai_msg.parent_id.sudo()
-            if ai_msg.author_id.sudo().gpt_id:
+            if ai_msg.author_id.sudo().gpt_id and answer_id.sudo().gpt_id and ai_msg.author_id.sudo().gpt_id == answer_id.sudo().gpt_id:
                 ai_content = str(ai_msg.body).replace("<p>", "").replace("</p>", "").replace("<p>", "")
                 context_history.insert(0, {
                     'role': 'assistant',
@@ -149,9 +152,14 @@ class Channel(models.Model):
                 res = res.replace('\n', '<br/>')
             new_msg = channel.with_user(user_id).message_post(body=res, message_type='comment', subtype_xmlid='mail.mt_comment', parent_id=message.id)
             if usage:
-                prompt_tokens = usage['prompt_tokens']
-                completion_tokens = usage['completion_tokens']
-                total_tokens = usage['total_tokens']
+                if ai.provider == 'ali':
+                    prompt_tokens = usage['input_tokens']
+                    completion_tokens = usage['output_tokens']
+                    total_tokens = usage['input_tokens'] + usage['output_tokens']
+                else:
+                    prompt_tokens = usage['prompt_tokens']
+                    completion_tokens = usage['completion_tokens']
+                    total_tokens = usage['total_tokens']
                 new_msg.write({
                     'human_prompt_tokens': prompt_tokens,
                     'ai_completion_tokens': completion_tokens,
@@ -171,7 +179,9 @@ class Channel(models.Model):
 
         # 不处理 一般notify，但处理欢迎
         if '<div class="o_mail_notification' in message.body and message.body != _('<div class="o_mail_notification">joined the channel</div>'):
-                return rdata
+            return rdata
+        if 'o_odoobot_command' in message.body:
+            return rdata
 
         if channel_type == 'chat':
             channel_partner_ids = self.channel_partner_ids
@@ -231,7 +241,8 @@ class Channel(models.Model):
             #     elif user_id.gpt_id and not is_allow:
             #         # 暂时有限用户的Ai
             #         raise UserError(_('此Ai暂时未开放，请联系管理员。'))
-
+        if hasattr(ai, 'is_translator') and ai.is_translator and ai.ai_model == 'translator':
+            return rdata
         chatgpt_channel_id = self.env.ref('app_chatgpt.channel_chatgpt')
         
         if message.body == _('<div class="o_mail_notification">joined the channel</div>'):
@@ -253,7 +264,7 @@ class Channel(models.Model):
         if ai and answer_id != message.author_id:
             api_key = ai.openapi_api_key
             if not api_key:
-                _logger.warning(_("ChatGPT Robot【%s】have not set open api key."))
+                _logger.warning(_("ChatGPT Robot【%s】have not set open api key.") % ai.name)
                 return rdata
             try:
                 openapi_context_timeout = int(self.env['ir.config_parameter'].sudo().get_param('app_chatgpt.openapi_context_timeout')) or 60
@@ -262,12 +273,14 @@ class Channel(models.Model):
             openai.api_key = api_key
             # 非4版本，取0次。其它取3 次历史
             chat_count = 3
-            if '4' in ai.ai_model:
+            if '4' in ai.ai_model or '4' in ai.name:
+                chat_count = 1
                 if hasattr(self, 'chat_count'):
                     if self.chat_count > 0:
                         chat_count = 1
             else:
                 chat_count = chat_count
+                
             if author_id != answer_id.id and self.channel_type == 'chat':
                 # 私聊
                 _logger.info(f'私聊:author_id:{author_id},partner_chatgpt.id:{answer_id.id}')
@@ -340,3 +353,8 @@ class Channel(models.Model):
         if c and not c.is_member:
             c.sudo().add_members([user.partner_id.id])
         return c_id
+
+    @api.onchange('ai_partner_id')
+    def _onchange_ai_partner_id(self):
+        if self.ai_partner_id and self.ai_partner_id.image_1920:
+            self.image_128 = self.ai_partner_id.avatar_128
