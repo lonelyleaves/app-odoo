@@ -17,7 +17,7 @@
 
 {
     'name': "App purchase search browse by partner",
-    'version': '16.23.12.07',
+    'version': '16.24.08.28',
     'author': 'odooai.cn',
     'category': 'Extra tools',
     'website': 'https://www.odooai.cn',
@@ -41,7 +41,9 @@
     ],
     'images': ['static/description/banner.png'],
     'data': [
-        'views/purchase_views.xml',
+        'views/purchase_order_views.xml',
+        'views/product_supplierinfo_views.xml',
+        'report/purchase_report_views.xml',
     ],
     
     'assets': {

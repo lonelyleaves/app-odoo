@@ -1,4 +1,4 @@
-# Odoo Addon for 17,16,15,14,13,12,11,10，Odoo的全版本开源免费增强集合
+# Odoo Addon for 18,17,16,15,14,13,12,11,10，Odoo的全版本开源免费增强集合
 
 本 Repo 在全球 Github 的最新主版本
 [https://github.com/guohuadeng/app-odoo](https://github.com/guohuadeng/app-odoo)
@@ -6,36 +6,43 @@
 本 Repo 在中国 Gitee 的每日同步镜像，便于中国用户访问
 [https://gitee.com/guohuadeng/app-odoo](https://gitee.com/guohuadeng/app-odoo)
 
-快速下载请至 [Odoo官方应用市场](https://apps.odoo.com/apps/modules/16.0/app_odoo_customize)
+更多高级功能模块、中文化模块、免费odoo模块，请至  [Odoo中文应用商店](https://www.odooapp.cn) 
+快速下载请至 [Odoo官方应用市场](https://apps.odoo.com/apps/modules/browse?search=odooai.cn)
 下载后留下好评和邮箱，我们会定期同步，并自动为该邮箱账户派送 应用商店红包
 
 ## Support by [欧度智能 odooAi.cn](https://www.odooai.cn)
 广州欧度智能科技有限公司
-Odoo中国官方伙伴，原欧度智能
+Odoo成功100%，Odoo专业开发实施培训，原广州尚鹏
 
-1. Odoo项目100%客户成功交付
-2. Odoo官网下载第一，服务上千家企业
-3. Odoo官网销量第一的中国公司
+1. Odoo项目100%海内外成功交付
+2. Odoo官方市场下载第一的中国公司
+3. Odoo官方市场销量第一的中国公司
 4. 钉钉、企业微信认证服务商
-5. 微软中国ChatGPT服务商，Ai服务中心
-6. 十年专注Odoo开源ERP开发实施培训
-7. Odoo中文[应用商店，海量免费及商业模块主题](https://www.odooapp.cn)
+5. 微软中国ChatGPT服务商，Ai中心
+6. 十年专注Odoo，服务智能制造
+7. 服务上千客户，多家上市公司
+8. Odoo中文应用商店 [应用商店，海量免费及商业模块主题](https://www.odooapp.cn)
 
-## Todo
-1. Odoo微信相关将已开发的、第三方的免费上架
-2. Odoo企业微信相关将已开发的、第三方的免费上架
-3. Odoo钉钉相关将已开发的、第三方的免费上架
-4. 原 ztree, superbar 的升级，升级 zchar
-5. Odoo社区版主题上架
-6. Odoo 17 升级部份已完成，等待发布
+## 最新上架 Odoo18, Odoo17, Odoo16版本模块
+1. Odoo全面优化，OEM模块。开发使用必备，全球近10万下载
+2. Odoo微信相关，企业微信相关
+3. 高级界面UI增强 ztree, superbar 的升级
+4. Odoo供应链、产销一体、业财一体模块
+5. Odoo开箱即用系列功能，让Odoo更快上手，马上用
 
-# Odoo Apps 清单，已上架 [Odoo中文应用商店](https://www.odooapp.cn)
+# Odoo Apps 清单，已上架 [Odoo中文应用商店](https://www.odooapp.cn)，[Odoo官方应用市场](https://apps.odoo.com/apps/modules/browse?search=odooai.cn)
 
-## app_account_invoice_product_multi_add
+## 应用 技术名
+### 应用 name
+应用 summary
 
-Account Invoice Product Multi Batch Add
+# Odoo Apps 清单，已上架 [Odoo中文应用商店](https://www.odooapp.cn)，[Odoo官方应用市场](https://apps.odoo.com/apps/modules/browse?search=odooai.cn)
 
-财务单据中批量增加明细
+    app_account_invoice_product_multi_add
+### App Account Invoice Product Multi Batch Add
+One Click to add multi product to Account Invoice.
+Account Invoice Product Multi Batch Add.
+客户收据与供应商帐单批量增加产品
 
 ## app_account_superbar
 

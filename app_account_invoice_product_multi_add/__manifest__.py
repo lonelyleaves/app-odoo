@@ -3,7 +3,7 @@
 # Created on 2023-10-20
 # author: 欧度智能，https://www.odooai.cn
 # email: 300883@qq.com
-# Copyright (C) 2009~2023 odooAi.cn
+# Copyright (C) 2009~2024 odooAi.cn
 
 # Odoo16在线用户手册（长期更新）
 # https://www.odooai.cn/documentation/16.0/zh_CN/index.html
@@ -34,8 +34,9 @@
     'price': 0.00,
     'currency': 'USD',
     'summary': """
-    App Account Invoice Product Multi Batch Add
-    Odoo App of odooai.cn
+    One Click to add multi product to Account Invoice.
+    Account Invoice Product Multi Batch Add.
+    客户收据与供应商帐单批量增加产品
     """,
     'description': """
     App Account Invoice Product Multi Add
